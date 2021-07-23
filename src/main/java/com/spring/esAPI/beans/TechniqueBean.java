@@ -1,0 +1,38 @@
+package com.spring.esAPI.beans;
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+
+import java.util.List;
+
+@NoArgsConstructor
+@Setter
+@Getter
+@Data
+@Document(indexName = "mitretest")
+public class TechniqueBean {
+	
+	@Id
+	public String id;
+	public String techniquename;
+	
+	@Field(name = "tactic")
+	public String tactic; 
+	public List<String> subtechniques;
+	public List<String> platforms;
+	public List<String> datasources;
+	public String version;
+	public String created;
+	public String lastmodified;
+	public String detection;
+	public String description;
+	public Object mitigations;
+	public String subtechniqueof;
+	public Object procedureexamples;
+	
+}
