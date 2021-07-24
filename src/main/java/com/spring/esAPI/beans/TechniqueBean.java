@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @Getter
 @Data
-@Document(indexName = "mitretest")
+@Document(indexName = "mitre123")
 public class TechniqueBean {
 	
 	@Id
