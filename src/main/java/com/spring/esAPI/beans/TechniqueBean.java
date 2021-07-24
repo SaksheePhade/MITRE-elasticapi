@@ -8,13 +8,15 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 
+import com.spring.esAPI.Constants;
+
 import java.util.List;
 
 @NoArgsConstructor
 @Setter
 @Getter
 @Data
-@Document(indexName = "mitre123")
+@Document(indexName = Constants.MITRE_INDEX)
 public class TechniqueBean {
 	
 	@Id

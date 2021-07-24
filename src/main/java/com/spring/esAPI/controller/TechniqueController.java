@@ -20,7 +20,6 @@ public class TechniqueController {
 
     @GetMapping("/techName/{techName}")
     public List<TechniqueBean> findTechniqueName(@PathVariable String techName){
-
         return getTechniques.findTechniqueName(techName);
     }
 }

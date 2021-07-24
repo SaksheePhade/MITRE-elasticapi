@@ -8,6 +8,7 @@ import org.springframework.data.elasticsearch.client.RestClients;
 import org.springframework.data.elasticsearch.config.AbstractElasticsearchConfiguration;
 
 
+
 @Configuration
 public class ElasticConfiguration {
 	
@@ -15,7 +16,7 @@ public class ElasticConfiguration {
 	    public RestHighLevelClient elasticsearchClient() {
 
 	        final ClientConfiguration clientConfiguration = ClientConfiguration.builder()
-	                .connectedTo("localhost:9200")
+	                .connectedTo(Constants.ELASTIC_URL)
 	                .build();
 
 	        return RestClients.create(clientConfiguration).rest();

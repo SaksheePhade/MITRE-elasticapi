@@ -1,9 +1,15 @@
 package com.spring.esAPI.dao;
 
 import com.spring.esAPI.beans.TechniqueBean;
+
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
@@ -14,9 +20,13 @@ import org.springframework.data.elasticsearch.core.query.Query;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
 @Component
 public class TechniqueDao {
     private final ElasticsearchOperations elasticsearchOperations;
+    
+    Logger logger = LoggerFactory.getLogger(TechniqueDao.class);
 
     public TechniqueDao(ElasticsearchOperations elasticsearchOperations) {
         this.elasticsearchOperations = elasticsearchOperations;
@@ -29,7 +39,9 @@ public class TechniqueDao {
         // 2. Execute search
         Query searchQuery=new NativeSearchQueryBuilder().withFilter(queryBuilder).build();
 
-        SearchHits<TechniqueBean>TechniqueHits=elasticsearchOperations.search(searchQuery,TechniqueBean.class,IndexCoordinates.of("mitre123"));
+        logger.debug("Searching..");
+        
+        SearchHits<TechniqueBean>TechniqueHits=elasticsearchOperations.search(searchQuery,TechniqueBean.class,IndexCoordinates.of("mitrenew"));
 
         // 3. Map searchHits to product list
         List<TechniqueBean>TechniqueMatch = new ArrayList<>();
@@ -39,9 +51,6 @@ public class TechniqueDao {
         });
 
         return TechniqueMatch;
-
-
-
     }
 
 }
