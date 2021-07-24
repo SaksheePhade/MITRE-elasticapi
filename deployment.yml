@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: services
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elastic-api
+  namespace: services
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elastic-api
+  template:
+    metadata:
+      labels:
+        app: elastic-api
+    spec:
+      containers:
+        - name: elastic-api
+          image: {{image}}
+          env:
+            - name: ELS_HOST
+              value: quickstart-es-http.default.svc.cluster.local:9200
+          ports:
+            - containerPort: 8080
+              name: http-8080
+              protocol: TCP
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: elastic-api
+  annotations:
+    meta.helm.sh/release-name: services
+    meta.helm.sh/release-namespace: services
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  labels:
+    app: elastic-api
+  namespace: services
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /elastic-api(/|$)(.*)
+            pathType: Prefix
+            backend:
+              serviceName: elastic-api
+              servicePort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    meta.helm.sh/release-name: services
+    meta.helm.sh/release-namespace: services
+  labels:
+    app: elastic-api
+  name: elastic-api
+  namespace: services
+spec:
+  ports:
+    - name: elastic-api-http-8080
+      port: 8080
+      protocol: TCP
+      targetPort: http-8080
+  selector:
+    app: elastic-api
+  sessionAffinity: None
+  type: ClusterIP
