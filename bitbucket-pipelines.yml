@@ -16,9 +16,13 @@ pipelines:
             - maven
           script:
             - mvn -B verify --file pom.xml
-          after-script:
-              # Collect checkstyle results, if any, and convert to Bitbucket Code Insights.
-            - pipe: atlassian/checkstyle-report:0.2.0
+            - aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID}
+            - aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY}
+            - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin $ECR            
+            - docker build -t $ECR/mit/elasticapi:$BITBUCKET_COMMIT .
+            - docker push $ECR/mit/elasticapi:$BITBUCKET_COMMIT
+          services:
+            - docker
       - step:
           name: Security Scan
           script:
