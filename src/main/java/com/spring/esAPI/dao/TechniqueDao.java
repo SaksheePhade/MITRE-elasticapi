@@ -1,5 +1,6 @@
 package com.spring.esAPI.dao;
 
+import com.spring.esAPI.Constants;
 import com.spring.esAPI.beans.TechniqueBean;
 
 
@@ -41,7 +42,7 @@ public class TechniqueDao {
 
         logger.debug("Searching..");
         
-        SearchHits<TechniqueBean>TechniqueHits=elasticsearchOperations.search(searchQuery,TechniqueBean.class,IndexCoordinates.of("mitrenew"));
+        SearchHits<TechniqueBean>TechniqueHits=elasticsearchOperations.search(searchQuery,TechniqueBean.class,IndexCoordinates.of(Constants.MITRE_INDEX));
 
         // 3. Map searchHits to product list
         List<TechniqueBean>TechniqueMatch = new ArrayList<>();
@@ -52,5 +53,26 @@ public class TechniqueDao {
 
         return TechniqueMatch;
     }
+
+    public List<TechniqueBean> findTechniqueID(final  String query){
+
+        QueryBuilder queryBuilder=QueryBuilders.matchQuery("id",query);
+
+        Query searchQuery=new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
+
+
+
+        SearchHits<TechniqueBean>TechniqueHits=elasticsearchOperations.search(searchQuery,TechniqueBean.class,IndexCoordinates.of(Constants.MITRE_INDEX));
+
+
+        List<TechniqueBean>TechniqueMatch = new ArrayList<>();
+
+        TechniqueHits.forEach(searchHit -> {
+            TechniqueMatch.add(searchHit.getContent());
+        });
+
+        return TechniqueMatch;
+    }
+
 
 }

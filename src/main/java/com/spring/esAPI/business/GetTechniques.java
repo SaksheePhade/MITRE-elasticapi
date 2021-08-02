@@ -17,5 +17,10 @@ public class GetTechniques {
         return techniqueDao.findTechniqueName(techniqueName);
     }
 
+    public List<TechniqueBean> findTechniqueID(String techniqueID){
+
+        return techniqueDao.findTechniqueID(techniqueID);
+    }
+
 
 }
