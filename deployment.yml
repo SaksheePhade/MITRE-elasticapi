@@ -6,23 +6,23 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: elastic-api
+  name: mit-els-api
   namespace: services
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: elastic-api
+      app: mit-els-api
   template:
     metadata:
       labels:
-        app: elastic-api
+        app: mit-els-api
     spec:
       containers:
-        - name: elastic-api
+        - name: mit-els-api
           image: {{image}}
           env:
-            - name: ELS_HOST
+            - name: ELS_URL
               value: quickstart-es-http.default.svc.cluster.local:9200
           ports:
             - containerPort: 8080
@@ -32,22 +32,22 @@ spec:
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: elastic-api
+  name: mit-els-api
   annotations:
     meta.helm.sh/release-name: services
     meta.helm.sh/release-namespace: services
     nginx.ingress.kubernetes.io/rewrite-target: /$2
   labels:
-    app: elastic-api
+    app: mit-els-api
   namespace: services
 spec:
   rules:
     - http:
         paths:
-          - path: /elastic-api(/|$)(.*)
+          - path: /mit-els-api(/|$)(.*)
             pathType: Prefix
             backend:
-              serviceName: elastic-api
+              serviceName: mit-els-api
               servicePort: 8080
 ---
 apiVersion: v1
@@ -57,16 +57,40 @@ metadata:
     meta.helm.sh/release-name: services
     meta.helm.sh/release-namespace: services
   labels:
-    app: elastic-api
-  name: elastic-api
+    app: mit-els-api
+  name: mit-els-api
   namespace: services
 spec:
   ports:
-    - name: elastic-api-http-8080
+    - name: mit-els-api-http-8080
       port: 8080
       protocol: TCP
       targetPort: http-8080
   selector:
-    app: elastic-api
+    app: mit-els-api
   sessionAffinity: None
   type: ClusterIP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mit-els-api
+  annotations:
+    meta.helm.sh/release-name: services
+    meta.helm.sh/release-namespace: services
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  labels:
+    app: mit-els-api
+  namespace: services
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /mit/els-api-service(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: mit-els-api
+                port:
+                  number: 8080
