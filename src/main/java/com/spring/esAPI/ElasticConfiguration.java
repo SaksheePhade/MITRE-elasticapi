@@ -20,7 +20,7 @@ public class ElasticConfiguration {
     @Bean
     public RestHighLevelClient elasticsearchClient() {
         String userName = Objects.isNull(System.getenv("ELS_USER_NAME")) ? Constants.ELS_USERNAME : System.getenv("ELS_USER_NAME");
-        String password = Objects.isNull(System.getenv("ELS_PASSWORD")) ? Constants.ELS_PASSWORD : System.getenv("ELS_USER_NAME");
+        String password = Objects.isNull(System.getenv("ELS_PASSWORD")) ? Constants.ELS_PASSWORD : System.getenv("ELS_PASSWORD");
         String elsURL = Objects.isNull(System.getenv("ELS_URL")) ? Constants.ELS_URL : System.getenv("ELS_URL");
         logger.info("Connecting to els " + elsURL + " with username: " + userName);
         final ClientConfiguration clientConfiguration = ClientConfiguration.builder()
