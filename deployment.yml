@@ -23,7 +23,11 @@ spec:
           image: {{image}}
           env:
             - name: ELS_URL
-              value: quickstart-es-http.default.svc.cluster.local:9200
+              value: dev-es-http.databases.svc.cluster.local:9200
+            - name: ELS_USERNAME
+              value: "elastic"
+            - name: ELS_PASSWORD
+              value: "9KACp49956n73ok2aqbcoI4I"
           ports:
             - containerPort: 8080
               name: http-8080
