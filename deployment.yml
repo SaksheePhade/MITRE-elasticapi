@@ -80,8 +80,7 @@ metadata:
   namespace: services
 spec:
   rules:
-    - host: api.trubu.org
-      http:
+    - http:
         paths:
           - path: /mit/els-api-service(/|$)(.*)
             pathType: Prefix
