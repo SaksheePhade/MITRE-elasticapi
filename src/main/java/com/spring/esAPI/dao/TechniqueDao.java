@@ -70,7 +70,7 @@ public class TechniqueDao {
 
     public List<TechniqueBean> findTechniqueTactic(final String query){
 
-        QueryBuilder queryBuilder=QueryBuilders.matchQuery("tactic",query);
+        QueryBuilder queryBuilder=QueryBuilders.matchQuery("tactic",query).fuzziness(Fuzziness.AUTO);
         Query searchQuery=new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
         SearchHits<TechniqueBean>TechniqueHits=elasticsearchOperations.search(searchQuery,TechniqueBean.class,IndexCoordinates.of(Constants.MITRE_INDEX));
         List<TechniqueBean>TechniqueMatch = new ArrayList<>();
