@@ -26,4 +26,18 @@ public class TechniqueController {
         return getTechniques.findTechniqueID(techID);
     }
 
+    @GetMapping("/techTactic/{techTactic}")
+    public List<TechniqueBean> findTechniqueTactic(@PathVariable String techTactic){
+        return getTechniques.findTechniqueTactic(techTactic);
+    }
+
+    @GetMapping("/techSubtechnique/{techSubtechnique}")
+    public List<TechniqueBean> findTechniqueSubtechnique(@PathVariable String techSubtechnique){
+        return getTechniques.findTechniqueSubtechnique(techSubtechnique);
+    }
+
+    @GetMapping("/techSubtechniqueOf/{techSubtechniqueOf}")
+    public List<TechniqueBean> findTechniqueSubtechniqueOf(@PathVariable String techSubtechniqueOf){
+        return getTechniques.findTechniqueSubtechniqueOf(techSubtechniqueOf);
+    }
 }

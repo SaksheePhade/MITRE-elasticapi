@@ -22,5 +22,21 @@ public class GetTechniques {
         return techniqueDao.findTechniqueID(techniqueID);
     }
 
+    public List<TechniqueBean> findTechniqueTactic(String techniqueTactic){
+
+        return techniqueDao.findTechniqueTactic(techniqueTactic);
+    }
+
+    public List<TechniqueBean> findTechniqueSubtechnique(String techniqueSubtechnique){
+
+        return techniqueDao.findTechniqueSubtenchnique(techniqueSubtechnique);
+    }
+
+    public List<TechniqueBean> findTechniqueSubtechniqueOf(String techniqueSubtechniqueOf){
+
+        return techniqueDao.findTechniqueSubtenchniqueOf(techniqueSubtechniqueOf);
+    }
+
+
 
 }

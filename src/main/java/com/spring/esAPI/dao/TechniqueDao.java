@@ -57,16 +57,23 @@ public class TechniqueDao {
     public List<TechniqueBean> findTechniqueID(final  String query){
 
         QueryBuilder queryBuilder=QueryBuilders.matchQuery("id",query);
-
         Query searchQuery=new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
-
-
-
         SearchHits<TechniqueBean>TechniqueHits=elasticsearchOperations.search(searchQuery,TechniqueBean.class,IndexCoordinates.of(Constants.MITRE_INDEX));
-
-
         List<TechniqueBean>TechniqueMatch = new ArrayList<>();
+        TechniqueHits.forEach(searchHit -> {
+            TechniqueMatch.add(searchHit.getContent());
+        });
 
+        return TechniqueMatch;
+
+    }
+
+    public List<TechniqueBean> findTechniqueTactic(final String query){
+
+        QueryBuilder queryBuilder=QueryBuilders.matchQuery("tactic",query);
+        Query searchQuery=new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
+        SearchHits<TechniqueBean>TechniqueHits=elasticsearchOperations.search(searchQuery,TechniqueBean.class,IndexCoordinates.of(Constants.MITRE_INDEX));
+        List<TechniqueBean>TechniqueMatch = new ArrayList<>();
         TechniqueHits.forEach(searchHit -> {
             TechniqueMatch.add(searchHit.getContent());
         });
@@ -74,5 +81,29 @@ public class TechniqueDao {
         return TechniqueMatch;
     }
 
+    public List<TechniqueBean> findTechniqueSubtenchnique(final String query){
 
+        QueryBuilder queryBuilder=QueryBuilders.matchQuery("subtechniques",query);
+        Query searchQuery=new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
+        SearchHits<TechniqueBean>TechniqueHits=elasticsearchOperations.search(searchQuery,TechniqueBean.class,IndexCoordinates.of(Constants.MITRE_INDEX));
+        List<TechniqueBean>TechniqueMatch = new ArrayList<>();
+        TechniqueHits.forEach(searchHit -> {
+            TechniqueMatch.add(searchHit.getContent());
+        });
+
+        return TechniqueMatch;
+    }
+
+    public List<TechniqueBean> findTechniqueSubtenchniqueOf(final String query){
+
+        QueryBuilder queryBuilder=QueryBuilders.matchQuery("subtechniqueof",query);
+        Query searchQuery=new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
+        SearchHits<TechniqueBean>TechniqueHits=elasticsearchOperations.search(searchQuery,TechniqueBean.class,IndexCoordinates.of(Constants.MITRE_INDEX));
+        List<TechniqueBean>TechniqueMatch = new ArrayList<>();
+        TechniqueHits.forEach(searchHit -> {
+            TechniqueMatch.add(searchHit.getContent());
+        });
+
+        return TechniqueMatch;
+    }
 }
