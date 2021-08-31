@@ -10,6 +10,7 @@ import org.springframework.data.elasticsearch.annotations.Field;
 
 import com.spring.esAPI.Constants;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -17,6 +18,21 @@ import java.util.List;
 @Getter
 @Data
 @Document(indexName = Constants.MITRE_INDEX)
+
+
+class RelationshipDetails{
+
+	public String source_data_element;
+	public String relationship;
+	public String target_data_element;
+}
+class DataSourceDetails{
+
+	public String Datasource;
+	public String Type;
+	public List<RelationshipDetails>Relationships =new ArrayList<RelationshipDetails>();
+};
+
 public class TechniqueBean {
 	
 	@Id
@@ -27,7 +43,6 @@ public class TechniqueBean {
 	public String tactic; 
 	public List<String> subtechniques;
 	public List<String> platforms;
-	public List<String> datasources;
 	public String version;
 	public String created;
 	public String lastmodified;
@@ -36,5 +51,5 @@ public class TechniqueBean {
 	public Object mitigations;
 	public String subtechniqueof;
 	public Object procedureexamples;
-	
+	public DataSourceDetails datasource=new DataSourceDetails();
 }
