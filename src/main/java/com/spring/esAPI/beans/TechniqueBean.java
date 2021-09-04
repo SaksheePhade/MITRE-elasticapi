@@ -20,18 +20,7 @@ import java.util.List;
 @Document(indexName = Constants.MITRE_INDEX)
 
 
-class RelationshipDetails{
 
-	public String source_data_element;
-	public String relationship;
-	public String target_data_element;
-}
-class DataSourceDetails{
-
-	public String Datasource;
-	public String Type;
-	public List<RelationshipDetails>Relationships =new ArrayList<RelationshipDetails>();
-};
 
 public class TechniqueBean {
 	
@@ -50,6 +39,9 @@ public class TechniqueBean {
 	public String description;
 	public Object mitigations;
 	public String subtechniqueof;
+	public Object datasources;
+	public String impacttype;
+	public String contributors;
 	public Object procedureexamples;
-	public DataSourceDetails datasource=new DataSourceDetails();
+
 }
