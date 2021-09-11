@@ -34,17 +34,13 @@ public class TechniqueDao {
     }
 
     public List<TechniqueBean> findTechniqueName(final  String query){
-        // 1. Create query on multiple fields enabling fuzzy search
-        QueryBuilder queryBuilder=QueryBuilders.multiMatchQuery(query,"techniquename","subtechniques").fuzziness(Fuzziness.AUTO);
 
-        // 2. Execute search
-        Query searchQuery=new NativeSearchQueryBuilder().withFilter(queryBuilder).build();
 
-        logger.debug("Searching..");
-        
-        SearchHits<TechniqueBean>TechniqueHits=elasticsearchOperations.search(searchQuery,TechniqueBean.class,IndexCoordinates.of(Constants.MITRE_INDEX));
+        QueryBuilder queryBuilder=QueryBuilders.matchPhraseQuery("techniquename",query);
+        Query searchQuery=new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
+        SearchHits<TechniqueBean>TechniqueHits=elasticsearchOperations.search(searchQuery,TechniqueBean.class,IndexCoordinates.of("mitre"));
 
-        // 3. Map searchHits to product list
+
         List<TechniqueBean>TechniqueMatch = new ArrayList<>();
 
         TechniqueHits.forEach(searchHit -> {
@@ -52,8 +48,10 @@ public class TechniqueDao {
         });
 
         return TechniqueMatch;
-    }
 
+
+
+    }
     public List<TechniqueBean> findTechniqueID(final  String query){
 
         QueryBuilder queryBuilder=QueryBuilders.matchQuery("id",query);
