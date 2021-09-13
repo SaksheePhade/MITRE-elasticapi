@@ -40,4 +40,9 @@ public class TechniqueController {
     public List<TechniqueBean> findTechniqueSubtechniqueOf(@PathVariable String techSubtechniqueOf){
         return getTechniques.findTechniqueSubtechniqueOf(techSubtechniqueOf);
     }
+
+    @GetMapping("/techAll/{techAll}")
+    public List<TechniqueBean>findTechniqueAll(@PathVariable String techAll){
+        return getTechniques.findTechniqueAll(techAll);
+    }
 }

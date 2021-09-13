@@ -37,6 +37,9 @@ public class GetTechniques {
         return techniqueDao.findTechniqueSubtenchniqueOf(techniqueSubtechniqueOf);
     }
 
+    public List<TechniqueBean> findTechniqueAll(String techniqueAll){
 
+        return techniqueDao.findTechniqueAll(techniqueAll);
+    }
 
 }
