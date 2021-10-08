@@ -20,16 +20,27 @@ import java.util.List;
 @Document(indexName = Constants.MITRE_INDEX)
 
 
+class RelationshipDetails{
+	public String source_data_element;
+	public String relationship;
+	public String target_data_element;
+}
 
+class DataSourceDetails{
+
+	public String name;
+	public String description;
+	public String type;
+	@Field(type = FieldType.Nested)
+	public List<RelationshipDetails>relationships;
+};
 
 public class TechniqueBean {
-	
-	@Id
-	public String id;
+	public String tid;
 	public String techniquename;
-	
+
 	@Field(name = "tactic")
-	public String tactic; 
+	public String tactic;
 	public List<String> subtechniques;
 	public List<String> platforms;
 	public String version;
@@ -39,9 +50,9 @@ public class TechniqueBean {
 	public String description;
 	public Object mitigations;
 	public String subtechniqueof;
-	public Object datasources;
 	public String impacttype;
 	public String contributors;
 	public Object procedureexamples;
-
+	@Field(type= FieldType.Nested)
+	public Map<String, List<DataSourceDetails>> datasources;
 }
