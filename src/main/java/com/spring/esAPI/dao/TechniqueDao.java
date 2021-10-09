@@ -38,7 +38,7 @@ public class TechniqueDao {
 
         QueryBuilder queryBuilder=QueryBuilders.matchPhraseQuery("techniquename",query);
         Query searchQuery=new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
-        SearchHits<TechniqueBean>TechniqueHits=elasticsearchOperations.search(searchQuery,TechniqueBean.class,IndexCoordinates.of("mitre"));
+        SearchHits<TechniqueBean>TechniqueHits=elasticsearchOperations.search(searchQuery,TechniqueBean.class,IndexCoordinates.of(Constants.MITRE_INDEX));
 
 
         List<TechniqueBean>TechniqueMatch = new ArrayList<>();
@@ -54,7 +54,7 @@ public class TechniqueDao {
     }
     public List<TechniqueBean> findTechniqueID(final  String query){
 
-        QueryBuilder queryBuilder=QueryBuilders.matchQuery("tid",query);
+        QueryBuilder queryBuilder=QueryBuilders.matchQuery("id",query);
         Query searchQuery=new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
         SearchHits<TechniqueBean>TechniqueHits=elasticsearchOperations.search(searchQuery,TechniqueBean.class,IndexCoordinates.of(Constants.MITRE_INDEX));
         List<TechniqueBean>TechniqueMatch = new ArrayList<>();
