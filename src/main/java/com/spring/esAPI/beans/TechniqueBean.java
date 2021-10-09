@@ -7,13 +7,13 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
+//import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import com.spring.esAPI.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+//import java.util.Map;
 
 @NoArgsConstructor
 @Setter
@@ -22,7 +22,7 @@ import java.util.Map;
 @Document(indexName = Constants.MITRE_INDEX)
 
 
-class RelationshipDetails{
+/*class RelationshipDetails{
 	public String source_data_element;
 	public String relationship;
 	public String target_data_element;
@@ -35,10 +35,12 @@ class DataSourceDetails{
 	public String type;
 	@Field(type = FieldType.Nested)
 	public List<RelationshipDetails>relationships;
-};
+};*/
 
 public class TechniqueBean {
-	public String tid;
+	@Id
+-	public String id;
+	//public String tid;
 	public String techniquename;
 
 	@Field(name = "tactic")
