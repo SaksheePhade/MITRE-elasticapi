@@ -55,6 +55,7 @@ public class TechniqueBean {
 	public String impacttype;
 	public String contributors;
 	public Object procedureexamples;
-	@Field(type= FieldType.Nested)
-	public Map<String, List<DataSourceDetails>> datasources;
+	//@Field(type= FieldType.Nested)
+	//public Map<String, List<DataSourceDetails>> datasources;
+	public Object datasources;
 }
