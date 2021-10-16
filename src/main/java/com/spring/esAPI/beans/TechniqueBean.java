@@ -23,8 +23,8 @@ public class TechniqueBean {
 	public String tid;
 	public String techniquename;
 	
-	@Field(name = "tactic")
-	public String tactic; 
+	@Field(name = "tactics")
+	public List<String> tactics; 
 	public List<String> subtechniques;
 	public List<String> platforms;
 	public Object datasources;
