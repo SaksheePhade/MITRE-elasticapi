@@ -20,6 +20,7 @@ import java.util.List;
 public class TechniqueBean {
 	
 	//@Id
+	@Field(name = "id")
 	public String id;
 	public String techniquename;
 	
