@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-//import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 
@@ -19,8 +19,8 @@ import java.util.List;
 @Document(indexName = Constants.MITRE_INDEX)
 public class TechniqueBean {
 	
-	//@Id
-	public String tid;
+	@Id
+	public String id;
 	public String techniquename;
 	
 	@Field(name = "tactics")
