@@ -19,7 +19,7 @@ import java.util.List;
 @Document(indexName = Constants.MITRE_INDEX)
 public class TechniqueBean {
 	
-	@Id
+	//@Id
 	public String id;
 	public String techniquename;
 	
