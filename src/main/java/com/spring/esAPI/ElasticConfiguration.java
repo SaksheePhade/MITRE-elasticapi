@@ -47,8 +47,6 @@ public class ElasticConfiguration  {
 
         final ClientConfiguration clientConfiguration = ClientConfiguration.builder()
                 .connectedTo(elsURL)
-                .usingSsl(insecureSslContext(), hostnameVerifier)
-                .withBasicAuth(userName, password)
                 .build();
         logger.info("Connected to els successfully");
         return RestClients.create(clientConfiguration).rest();

@@ -108,7 +108,7 @@ public class TechniqueDao {
 
     public List<TechniqueBean> findTechniqueAll(final String query){
 
-        QueryBuilder queryBuilder=QueryBuilders.multiMatchQuery(query,"techniquename","subtechniqueof","tactics","description","detection").fuzziness(Fuzziness.AUTO);
+        QueryBuilder queryBuilder=QueryBuilders.multiMatchQuery(query, "tid", "techniquename","subtechniqueof","tactics","description","detection");
         Query searchQuery=new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
         SearchHits<TechniqueBean>TechniqueHits=elasticsearchOperations.search(searchQuery,TechniqueBean.class,IndexCoordinates.of(Constants.MITRE_INDEX));
         List<TechniqueBean>TechniqueMatch = new ArrayList<>();
