@@ -20,10 +20,10 @@ import java.util.List;
 public class TechniqueBean {
 	
 	//@Id
-	@Field(name = "id")
-	public String id;
+	@Field(name = "tid")
+	public String tid;
 	public String techniquename;
-	
+	public String tactic;
 	@Field(name = "tactics")
 	public List<String> tactics; 
 	public List<String> subtechniques;
