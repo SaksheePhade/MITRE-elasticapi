@@ -1,5 +1,7 @@
 package com.spring.esAPI;
 
+/*Constant variables*/
+
 public class Constants {
 
     public static final String MITRE_INDEX = "mitre";

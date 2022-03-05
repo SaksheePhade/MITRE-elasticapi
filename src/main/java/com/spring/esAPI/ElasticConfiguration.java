@@ -1,5 +1,9 @@
 package com.spring.esAPI;
 
+/*
+ Establishes connection with Elasticsearch
+ */
+
 import org.apache.http.ssl.SSLContexts;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.slf4j.Logger;
@@ -48,6 +52,7 @@ public class ElasticConfiguration  {
         final ClientConfiguration clientConfiguration = ClientConfiguration.builder()
                 .connectedTo(elsURL)
                 .build();
+        
         logger.info("Connected to els successfully");
         return RestClients.create(clientConfiguration).rest();
     }

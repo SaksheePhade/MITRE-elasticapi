@@ -29,6 +29,7 @@ public class TechniqueDao {
     
     Logger logger = LoggerFactory.getLogger(TechniqueDao.class);
 
+    /*ElasticsearchOperations interface contains common helper functions*/
     public TechniqueDao(ElasticsearchOperations elasticsearchOperations) {
         this.elasticsearchOperations = elasticsearchOperations;
     }
@@ -36,7 +37,7 @@ public class TechniqueDao {
     public List<TechniqueBean> findTechniqueName(final  String query){
 
 
-        QueryBuilder queryBuilder=QueryBuilders.matchPhraseQuery("techniquename",query);
+        QueryBuilder queryBuilder=QueryBuilders.matchPhraseQuery("techniquename",query); /*Creates an ES query matching the field techniquename*/
         Query searchQuery=new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
         SearchHits<TechniqueBean>TechniqueHits=elasticsearchOperations.search(searchQuery,TechniqueBean.class,IndexCoordinates.of(Constants.MITRE_INDEX));
 
@@ -54,7 +55,7 @@ public class TechniqueDao {
     }
     public List<TechniqueBean> findTechniqueID(final  String query){
 
-        QueryBuilder queryBuilder=QueryBuilders.matchQuery("tid",query);
+        QueryBuilder queryBuilder=QueryBuilders.matchQuery("tid",query); /*Creates an ES query matching the field technique ID*/
         Query searchQuery=new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
         SearchHits<TechniqueBean>TechniqueHits=elasticsearchOperations.search(searchQuery,TechniqueBean.class,IndexCoordinates.of(Constants.MITRE_INDEX));
         List<TechniqueBean>TechniqueMatch = new ArrayList<>();
@@ -68,7 +69,7 @@ public class TechniqueDao {
 
     public List<TechniqueBean> findTechniqueTactic(final String query){
 
-        QueryBuilder queryBuilder=QueryBuilders.matchQuery("tactic",query).fuzziness(Fuzziness.AUTO);
+        QueryBuilder queryBuilder=QueryBuilders.matchQuery("tactic",query).fuzziness(Fuzziness.AUTO); /*Creates an ES query matching the field tactic*/
         Query searchQuery=new NativeSearchQueryBuilder().withQuery(queryBuilder).build();
         SearchHits<TechniqueBean>TechniqueHits=elasticsearchOperations.search(searchQuery,TechniqueBean.class,IndexCoordinates.of(Constants.MITRE_INDEX));
         List<TechniqueBean>TechniqueMatch = new ArrayList<>();

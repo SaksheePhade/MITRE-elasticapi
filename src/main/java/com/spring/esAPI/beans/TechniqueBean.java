@@ -12,6 +12,16 @@ import com.spring.esAPI.Constants;
 
 import java.util.List;
 
+/*Data model
+ * 
+ * tid : Unique ID of the technique
+ * techniquename : Name
+ * tactic : The Tactic to which given technique belongs
+ * subtechniques : List of subtechniques under given technique
+ * 
+ * 
+ * */
+
 @NoArgsConstructor
 @Setter
 @Getter
